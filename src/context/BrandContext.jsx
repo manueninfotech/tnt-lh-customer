@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import api from '../services/api';
+import settingsService from '../services/settingsService';
 
 const BrandContext = createContext();
 
@@ -10,11 +11,34 @@ export const BrandProvider = ({ children }) => {
     const location = useLocation();
 
     const [brand, setBrandState] = useState('teasntrees');
+    const [isLittleHActive, setIsLittleHActive] = useState(true);
 
-    // Auto-detect brand from URL path
+    const fetchBrandStatus = async () => {
+        try {
+            const res = await settingsService.getBrandsStatus();
+            if (res?.success && res?.data?.littleh) {
+                const active = res.data.littleh.isStoreActive !== false;
+                setIsLittleHActive(active);
+            }
+        } catch (err) {
+            console.error('Error checking brand status:', err);
+        }
+    };
+
+    useEffect(() => {
+        fetchBrandStatus();
+    }, []);
+
+    // Auto-detect brand from URL path & handle Little H disabled redirection
     useEffect(() => {
         const path = location.pathname;
         const urlBrand = path.split('/')[1]?.toLowerCase();
+
+        // If Little H is disabled and customer tries to access /littleh routes, redirect to /teasntrees
+        if (urlBrand === 'littleh' && !isLittleHActive) {
+            window.location.replace('/teasntrees');
+            return;
+        }
 
         if (urlBrand === 'littleh' || urlBrand === 'teasntrees') {
             setBrandState(urlBrand);
@@ -22,11 +46,13 @@ export const BrandProvider = ({ children }) => {
             // Default to teasntrees if no valid brand in URL
             setBrandState('teasntrees');
         }
-    }, [location.pathname]);
+    }, [location.pathname, isLittleHActive]);
 
     // setBrand is now mostly to handle programmatic navigation if needed
     const setBrand = (newBrand) => {
-        // In the new system, we navigate to the new brand URL instead of just setting state
+        if (newBrand === 'littleh' && !isLittleHActive) {
+            return; // Prevent navigating to Little H if turned off
+        }
         if (newBrand && newBrand !== brand) {
             window.location.href = `/${newBrand}`;
         }
@@ -47,7 +73,7 @@ export const BrandProvider = ({ children }) => {
     };
 
     return (
-        <BrandContext.Provider value={{ brand, setBrand, theme }}>
+        <BrandContext.Provider value={{ brand, setBrand, theme, isLittleHActive, refreshBrandStatus: fetchBrandStatus }}>
             {children}
         </BrandContext.Provider>
     );

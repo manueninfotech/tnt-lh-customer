@@ -15,7 +15,7 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { cartCount, toggleCart } = useCart();
     const { wishlistItems } = useWishlist();
-    const { brand, setBrand, theme } = useBrand();
+    const { brand, setBrand, theme, isLittleHActive } = useBrand();
     const navigate = useNavigate();
     const location = useLocation();
     const queryClient = useQueryClient();
@@ -58,27 +58,29 @@ const Navbar = () => {
                         />
                     </Link>
 
-                    {/* Brand Switcher Desktop */}
-                    <div className={cn("hidden lg:flex p-1 rounded-full items-center border transition-colors", theme.isLittleH ? "bg-bakery-light border-bakery-accent/20" : "bg-white/50 backdrop-blur-md border-white/60")}>
-                        <button
-                            onClick={() => { setBrand('teasntrees'); navigate('/teasntrees'); }}
-                            className={cn(
-                                "px-4 py-1.5 rounded-full text-sm font-bold transition-all",
-                                theme.isTeasNTrees ? "bg-cafe-emerald text-white shadow-md shadow-cafe-emerald/30" : "text-slate-500 hover:text-slate-800"
-                            )}
-                        >
-                            Teas N Trees
-                        </button>
-                        <button
-                            onClick={() => { setBrand('littleh'); navigate('/littleh'); }}
-                            className={cn(
-                                "px-4 py-1.5 rounded-full text-sm font-bold transition-all",
-                                theme.isLittleH ? "bg-pink-500 text-white shadow-md shadow-pink-500/30" : "text-slate-500 hover:text-slate-800"
-                            )}
-                        >
-                            LittleH
-                        </button>
-                    </div>
+                    {/* Brand Switcher Desktop - Only shown when Little H is active */}
+                    {isLittleHActive && (
+                        <div className={cn("hidden lg:flex p-1 rounded-full items-center border transition-colors", theme.isLittleH ? "bg-bakery-light border-bakery-accent/20" : "bg-white/50 backdrop-blur-md border-white/60")}>
+                            <button
+                                onClick={() => { setBrand('teasntrees'); navigate('/teasntrees'); }}
+                                className={cn(
+                                    "px-4 py-1.5 rounded-full text-sm font-bold transition-all",
+                                    theme.isTeasNTrees ? "bg-cafe-emerald text-white shadow-md shadow-cafe-emerald/30" : "text-slate-500 hover:text-slate-800"
+                                )}
+                            >
+                                Teas N Trees
+                            </button>
+                            <button
+                                onClick={() => { setBrand('littleh'); navigate('/littleh'); }}
+                                className={cn(
+                                    "px-4 py-1.5 rounded-full text-sm font-bold transition-all",
+                                    theme.isLittleH ? "bg-pink-500 text-white shadow-md shadow-pink-500/30" : "text-slate-500 hover:text-slate-800"
+                                )}
+                            >
+                                LittleH
+                            </button>
+                        </div>
+                    )}
                 </div>
 
                 {/* Center Spacer */}
@@ -151,27 +153,29 @@ const Navbar = () => {
                         className={cn("lg:hidden overflow-hidden border-t", theme.isLittleH ? "bg-bakery-bg border-bakery-accent/20" : "bg-white/95 backdrop-blur-xl border-slate-100")}
                     >
                         <div className="p-6 flex flex-col gap-4">
-                            {/* Brand Switcher Mobile */}
-                            <div className="flex p-1 bg-slate-100 rounded-full mb-4">
-                                <button
-                                    onClick={() => { setBrand('teasntrees'); navigate('/teasntrees'); setIsOpen(false); }}
-                                    className={cn(
-                                        "flex-1 py-2 rounded-full text-sm font-bold transition-all",
-                                        theme.isTeasNTrees ? "bg-white text-cafe-emerald shadow-sm" : "text-slate-500"
-                                    )}
-                                >
-                                    Teas N Trees
-                                </button>
-                                <button
-                                    onClick={() => { setBrand('littleh'); navigate('/littleh'); setIsOpen(false); }}
-                                    className={cn(
-                                        "flex-1 py-2 rounded-full text-sm font-bold transition-all",
-                                        theme.isLittleH ? "bg-white text-pink-500 shadow-sm" : "text-slate-500"
-                                    )}
-                                >
-                                    LittleH
-                                </button>
-                            </div>
+                            {/* Brand Switcher Mobile - Only shown when Little H is active */}
+                            {isLittleHActive && (
+                                <div className="flex p-1 bg-slate-100 rounded-full mb-4">
+                                    <button
+                                        onClick={() => { setBrand('teasntrees'); navigate('/teasntrees'); setIsOpen(false); }}
+                                        className={cn(
+                                            "flex-1 py-2 rounded-full text-sm font-bold transition-all",
+                                            theme.isTeasNTrees ? "bg-white text-cafe-emerald shadow-sm" : "text-slate-500"
+                                        )}
+                                    >
+                                        Teas N Trees
+                                    </button>
+                                    <button
+                                        onClick={() => { setBrand('littleh'); navigate('/littleh'); setIsOpen(false); }}
+                                        className={cn(
+                                            "flex-1 py-2 rounded-full text-sm font-bold transition-all",
+                                            theme.isLittleH ? "bg-white text-pink-500 shadow-sm" : "text-slate-500"
+                                        )}
+                                    >
+                                        LittleH
+                                    </button>
+                                </div>
+                            )}
 
                             {/* Mobile Search Removed */}
 
