@@ -72,7 +72,7 @@ const HomePage = () => {
                                 transition={{ duration: 1, ease: "easeOut" }}
                                 className="lg:col-span-5 space-y-8 z-10"
                             >
-                                <span className="uppercase tracking-[0.3em] text-[#8B8E7B] text-sm font-semibold">Artisan Bakery & Patisserie</span>
+                                <span className="uppercase tracking-[0.3em] text-[#8B8E7B] text-sm font-semibold">Artisan Bakery</span>
                                 <h1 className="text-6xl lg:text-7xl xl:text-8xl font-playfair font-black tracking-tight leading-[1.05] text-[#565A47]">
                                     Baking <br />
                                     <span className="italic font-light text-[#8B8E7B]">Happiness</span> <br />
@@ -106,7 +106,7 @@ const HomePage = () => {
                                 >
                                     <img
                                         src={LittleHHero}
-                                        alt="LittleH Artisanal Sweets"
+                                        alt="Cream N Crust artisanal sweets"
                                         className="w-full h-full object-contain drop-shadow-2xl scale-125"
                                     />
                                 </motion.div>
@@ -201,7 +201,7 @@ const HomePage = () => {
                             {/* White bottom section */}
                             <div className="bg-white px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
                                 <div>
-                                    <p className={`text-[#565A47] text-sm font-bold ${brand === 'littleh' ? 'font-playfair' : ''}`}>Welcome to the LittleH family ✨</p>
+                                    <p className={`text-[#565A47] text-sm font-bold ${brand === 'littleh' ? 'font-playfair' : ''}`}>Welcome to the Cream N Crust family ✨</p>
                                     <p className="text-[#8B8E7B] text-[10px] uppercase tracking-wider font-bold">First order exclusive</p>
                                 </div>
                                 <div className="flex items-center gap-3">
@@ -331,7 +331,7 @@ const HomePage = () => {
                                 ) : (
                                     <img
                                         src={LittleHHero}
-                                        alt="LittleH Bakery Sweets"
+                                        alt="Cream N Crust bakery sweets"
                                         className="w-full h-full object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
                                     />
                                 )}

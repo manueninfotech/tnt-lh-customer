@@ -23,13 +23,13 @@ const CartDrawer = () => {
 
     // Group items by brand
     const groupedItems = cartItems.reduce((acc, item) => {
-        const itemBrand = item.brand === 'littleh' ? 'LittleH Bakery' : 'Teas N Trees';
+        const itemBrand = item.brand === 'littleh' ? 'Cream N Crust' : 'Teas N Trees';
         if (!acc[itemBrand]) acc[itemBrand] = [];
         acc[itemBrand].push(item);
         return acc;
     }, {});
 
-    const brandOrder = ['Teas N Trees', 'LittleH Bakery'];
+    const brandOrder = ['Teas N Trees', 'Cream N Crust'];
 
     const handleCheckout = () => {
         toggleCart();
@@ -271,7 +271,7 @@ const CartDrawer = () => {
                                                 <div className="flex items-center gap-4 px-2">
                                                     <span className={cn(
                                                         "text-xs font-bold uppercase tracking-widest whitespace-nowrap",
-                                                        brandName === 'LittleH Bakery' ? "text-pink-600" : "text-cafe-emerald"
+                                                        brandName === 'Cream N Crust' ? "text-pink-600" : "text-cafe-emerald"
                                                     )}>
                                                         {brandName}
                                                     </span>

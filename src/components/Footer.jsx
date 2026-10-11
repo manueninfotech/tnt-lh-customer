@@ -33,7 +33,7 @@ export default function Footer() {
                                 "text-lg font-black uppercase tracking-[0.2em]",
                                 theme.isLittleH ? "text-[#FAF1E8] font-playfair" : "text-emerald-50"
                             )}>
-                                {theme.isLittleH ? "LittleH Patisserie" : "Teas N Trees"}
+                                {theme.isLittleH ? "Cream N Crust" : "Teas N Trees"}
                             </span>
                         </div>
                         <p className={cn(

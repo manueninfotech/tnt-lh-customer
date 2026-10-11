@@ -17,14 +17,14 @@ const AboutPage = () => {
                             Crafting <span className="italic font-light">Happiness,</span><br />One Bake at a Time.
                         </h1>
                         <p className="text-[#8B8E7B] text-xl font-light leading-relaxed max-w-2xl mx-auto">
-                            Founded on a profound love for traditional baking and modern artistry, LittleH Patisserie is your neighborhood sanctuary for sweet indulgence.
+                            Founded on a profound love for traditional baking and modern artistry, Cream N Crust is your neighborhood sanctuary for sweet indulgence.
                         </p>
                     </div>
 
                     <div className="relative w-full aspect-[21/9] overflow-hidden bg-[#FDF5EC]">
                         <img
                             src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&q=80&w=2000"
-                            alt="LittleH Bakery Interior"
+                            alt="Cream N Crust bakery interior"
                             className="w-full h-full object-cover opacity-90 sepia-[0.2]"
                         />
                     </div>
@@ -130,7 +130,7 @@ const AboutPage = () => {
                         <h2 className="text-3xl font-bold text-slate-800">Our Story</h2>
                         <div className={`w-20 h-1.5 bg-gradient-to-r ${theme.gradientClass} rounded-full`} />
                         <p className="text-slate-600 leading-relaxed text-lg">
-                            {theme.isTeasNTrees ? 'Teas N Trees began with a simple idea: to create a sanctuary where people can pause, reflect, and enjoy the finest teas and coffees amidst the hustle of city life.' : 'LittleH Bakery began with a profound love for baking. We desired to create a colorful escape offering the finest and freshest sweet treats to sprinkle joy on every occasion.'}
+                            {theme.isTeasNTrees ? 'Teas N Trees began with a simple idea: to create a sanctuary where people can pause, reflect, and enjoy the finest teas and coffees amidst the hustle of city life.' : 'Cream N Crust began with a profound love for baking. We desired to create a colorful escape offering the finest and freshest sweet treats to sprinkle joy on every occasion.'}
                         </p>
                         <p className="text-slate-600 leading-relaxed text-lg">
                             We believe in Little Happiness. It's found in the aroma of {theme.isTeasNTrees ? 'freshly brewed chai' : 'a beautifully baked cake'}, the crunch of a perfectly baked cookie, and the warmth of a friendly smile.

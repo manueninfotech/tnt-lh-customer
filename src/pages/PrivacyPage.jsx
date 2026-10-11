@@ -60,9 +60,9 @@ export default function PrivacyPage() {
     };
 
     const littleHPolicy = {
-        title: "Little H Patisserie Privacy Policy",
+        title: "Cream N Crust Privacy Policy",
         lastUpdated: "July 13, 2026",
-        intro: "Little H Patisserie respects your privacy. This policy documents how our patisserie collecting system manages your personal data, custom cake preferences, and ordering records.",
+        intro: "Cream N Crust Artisan Bakery respects your privacy. This policy documents how our ordering system manages your personal data, custom cake preferences, and ordering records.",
         sections: [
             {
                 id: "collection",
@@ -137,7 +137,7 @@ export default function PrivacyPage() {
                         <h1 className={cn("text-2xl font-bold tracking-tight", !isTeasTheme && "font-playfair")}>Legal & Privacy Center</h1>
                     </div>
                     <p className={cn("text-xs", isTeasTheme ? "text-slate-500" : "text-[#8B8E7B]")}>
-                        Official policy governing the digital ordering systems for {isTeasTheme ? "Teas N Trees Cafe" : "Little H Patisserie"}
+                        Official policy governing the digital ordering systems for {isTeasTheme ? "Teas N Trees Cafe" : "Cream N Crust Artisan Bakery"}
                     </p>
                 </div>
 

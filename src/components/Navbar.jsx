@@ -9,7 +9,7 @@ import { useBrand } from '../context/BrandContext';
 import { useQueryClient } from '@tanstack/react-query';
 import { productService } from '../services/productService';
 import Logo from '../assets/logoteasntrees-removebg-preview.png';
-import LittleHLogo from '../assets/littleh-logo.png'; // Make sure this file exists!
+import LittleHLogo from '../assets/cream-n-crust-logo.png';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -53,7 +53,7 @@ const Navbar = () => {
                             alt={theme.brandName}
                             className={cn(
                                 "w-auto object-contain transition-transform group-hover:scale-105 duration-300",
-                                theme.isLittleH ? "h-20 md:h-24 scale-125" : "h-10 md:h-14"
+                                "h-10 md:h-14"
                             )}
                         />
                     </Link>
@@ -76,7 +76,7 @@ const Navbar = () => {
                                 theme.isLittleH ? "bg-pink-500 text-white shadow-md shadow-pink-500/30" : "text-slate-500 hover:text-slate-800"
                             )}
                         >
-                            LittleH
+                            Cream N Crust
                         </button>
                     </div>
                 </div>
@@ -169,7 +169,7 @@ const Navbar = () => {
                                         theme.isLittleH ? "bg-white text-pink-500 shadow-sm" : "text-slate-500"
                                     )}
                                 >
-                                    LittleH
+                                    Cream N Crust
                                 </button>
                             </div>
 

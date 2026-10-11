@@ -182,7 +182,7 @@ const ContactPage = () => {
                                     <div className="flex gap-4 items-start">
                                         <MapPin className="w-5 h-5 text-[#8B8E7B] mt-1 shrink-0" strokeWidth={1.5} />
                                         <div>
-                                            <div className="font-playfair text-xl text-[#565A47] mb-1">LittleH Patisserie</div>
+                                            <div className="font-playfair text-xl text-[#565A47] mb-1">Cream N Crust</div>
                                             <div className="font-light text-[#8B8E7B] leading-relaxed">
                                                 {settings?.address || "Laxmipuram, Guntur, Andhra Pradesh"}
                                             </div>

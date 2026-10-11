@@ -43,7 +43,7 @@ export const BrandProvider = ({ children }) => {
         gradientClass: brand === 'littleh' ? 'from-bakery-primary to-bakery-accent' : 'from-cafe-emerald to-cafe-teal',
         gradientHoverClass: brand === 'littleh' ? 'hover:shadow-bakery-primary/40' : 'hover:shadow-cafe-emerald/40',
         shadowClass: brand === 'littleh' ? 'shadow-bakery-primary/30' : 'shadow-cafe-emerald/30',
-        brandName: brand === 'littleh' ? 'LittleH Bakery' : 'Teas N Trees',
+        brandName: brand === 'littleh' ? 'Cream N Crust' : 'Teas N Trees',
     };
 
     return (
