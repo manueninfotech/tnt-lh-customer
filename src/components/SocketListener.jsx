@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
 import { useSocket } from '../context/SocketContext';
+import { useBrand } from '../context/BrandContext';
 import { useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 const SocketListener = () => {
     const { socket } = useSocket();
+    const { refreshBrandStatus } = useBrand();
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
@@ -48,9 +50,15 @@ const SocketListener = () => {
             toast(`Rider ${data.riderName || ''} assigned!`, { icon: '🛵' });
         };
 
+        const handleSettingsUpdated = () => {
+            if (refreshBrandStatus) refreshBrandStatus();
+            queryClient.invalidateQueries();
+        };
+
         socket.on('order:status-updated', handleStatusUpdate);
         socket.on('order:rider-assigned', handleDeliveryAssigned);
         socket.on('delivery:assigned', handleDeliveryAssigned); // Legacy support
+        socket.on('settings:updated', handleSettingsUpdated);
         socket.on('system:data-updated', () => {
             queryClient.invalidateQueries();
         });
@@ -59,9 +67,10 @@ const SocketListener = () => {
             socket.off('order:status-updated', handleStatusUpdate);
             socket.off('order:rider-assigned', handleDeliveryAssigned);
             socket.off('delivery:assigned', handleDeliveryAssigned);
+            socket.off('settings:updated', handleSettingsUpdated);
             socket.off('system:data-updated');
         };
-    }, [socket, queryClient]);
+    }, [socket, queryClient, refreshBrandStatus]);
 
     return null; // Logic only component
 };
