@@ -1,0 +1,66 @@
+name: Deploy Website
+
+# Builds the site and deploys it to the Windows VM (teasntrees.in) on every
+# push to main. The VM keeps the previous version: Actions -> Deploy Website
+# -> Run workflow with "rollback" ticked puts it back.
+#
+# Repo secrets: VM_HOST, VM_USER, VM_SSH_KEY (a key used only by this
+# workflow). Repo variables: the VITE_* build settings (all of them end up in
+# the public bundle anyway).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      rollback:
+        description: 'Put the previous version back instead of deploying'
+        type: boolean
+        default: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        if: ${{ !inputs.rollback }}
+      - uses: actions/setup-node@v4
+        if: ${{ !inputs.rollback }}
+        with:
+          node-version: 22
+          cache: npm
+      - name: Build
+        if: ${{ !inputs.rollback }}
+        env:
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
+          VITE_FIREBASE_API_KEY: ${{ vars.VITE_FIREBASE_API_KEY }}
+          VITE_FIREBASE_AUTH_DOMAIN: ${{ vars.VITE_FIREBASE_AUTH_DOMAIN }}
+          VITE_FIREBASE_PROJECT_ID: ${{ vars.VITE_FIREBASE_PROJECT_ID }}
+          VITE_FIREBASE_STORAGE_BUCKET: ${{ vars.VITE_FIREBASE_STORAGE_BUCKET }}
+          VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ vars.VITE_FIREBASE_MESSAGING_SENDER_ID }}
+          VITE_FIREBASE_APP_ID: ${{ vars.VITE_FIREBASE_APP_ID }}
+          VITE_GOOGLE_MAPS_API_KEY: ${{ vars.VITE_GOOGLE_MAPS_API_KEY }}
+        run: |
+          npm ci
+          npm run build
+          test -f dist/index.html
+          tar -czf web-dist.tgz -C dist .
+      - name: Upload the build
+        if: ${{ !inputs.rollback }}
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          source: web-dist.tgz
+          target: C:/web/tntlh
+      - name: Install it (or roll back)
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          script_stop: true
+          # deploy-web.ps1 lives on the VM: it keeps the previous version and
+          # restores it if the site stops answering.
+          script: powershell -NoProfile -ExecutionPolicy Bypass -File C:\Users\tntadmin\deploy-web.ps1 ${{ inputs.rollback && '-Rollback' || '' }}
